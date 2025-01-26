@@ -1,0 +1,22 @@
+# Environments
+.env
+venv/
+env/
+
+# Compiled Python files
+*.pyc
+__pycache__
+
+# Media and static files (if they are user-uploaded)
+media/
+staticfiles/
+
+# IDE-specific files
+.idea/
+*.iml
+
+# Database file (if you're using SQLite)
+db.sqlite3
+
+# Security keys (remove your actual keys from views.py before adding to .gitignore!)
+YOUR-API-KEY

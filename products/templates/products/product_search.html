@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product List</title>
+  <style>
+    * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(ellipse at center, #1a2a38, #0c1620);
+  background-size: 200% 200%;
+  animation: gradientAnimation 20s ease infinite;
+  color: #ffffff;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+h1 {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: 3.5rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.search-info {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.search-info p {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+.search-info strong {
+  font-weight: 600;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.product-card {
+  width: 300px;
+  margin: 20px;
+  background-color: rgba(28, 44, 56, 0.9);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  animation: formAnimation 1.5s ease-in-out;
+}
+
+@keyframes formAnimation {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.product-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-info {
+  margin-top: 1rem;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.product-info p {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+.product-info p:last-child {
+  font-weight: bold;
+  color: #fff;
+}
+
+.no-products {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: rgba(28, 44, 56, 0.7);
+  border-radius: 8px;
+}
+  </style>
+</head>
+<body>
+  <h1>Product List</h1>
+
+  <div class="search-info">
+    <p><strong>Search Query:</strong> {{ search_query }}</p>
+    <p><strong>Selected Websites:</strong> {{ selected_websites|join:", " }}</p>
+</div>
+
+  <div class="product-list">
+    {% for product in products %}
+    <div class="product-card">
+      <a href="{{ product.source_url }}" target="_blank">
+        <img src="{{ product.image }}" alt="{{ product.title }}">
+        <div class="product-info">
+          <h3>{{ product.title }}</h3>
+          <p>{{ product.website }}</p>
+          <p>Price: ${{ product.price }}</p>
+        </div>
+      </a>
+    </div>
+    {% empty %}
+    <p class="no-products">No products found.</p>
+    {% endfor %}
+  </div>
+</body>
+</html>

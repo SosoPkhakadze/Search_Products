@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product Search</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: radial-gradient(ellipse at center, #1a2a38, #0c1620);
+      background-size: 200% 200%;
+      animation: gradientAnimation 20s ease infinite;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow: hidden;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin: 2rem 0;
+      font-size: 4.5rem;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+      animation: headingAnimation 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes headingAnimation {
+      0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+      }
+      100% {
+        transform: translateY(-20px) rotate(3deg) scale(1.1);
+      }
+    }
+
+    form {
+    max-width: 700px;
+    margin: 5% auto; 
+    margin-top: -20px;
+    background-color: rgba(28, 44, 56, 0.9);
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    animation: formAnimation 1.5s ease-in-out;
+  }
+
+    @keyframes formAnimation {
+      0% {
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-weight: bold;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.4rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: #ffffff;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3);
+      transition: box-shadow 0.3s ease;
+    }
+
+    input[type="text"]:focus {
+      outline: none;
+      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(22, 161, 237, 0.8);
+    }
+
+    div {
+      margin-bottom: 1.5rem;
+    }
+
+    button[type="submit"] {
+      display: block;
+      margin: 1.5rem auto 0;
+      padding: 1.2rem 2.5rem;
+      background-color: #16a1ed;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #1282c1;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    button[type="submit"]:active {
+      background-color: #0e638b;
+      transform: translateY(0);
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.4);
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      animation: particleAnimation 10s infinite;
+    }
+
+    @keyframes particleAnimation {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(100vw, 100vh) scale(1.5);
+        opacity: 0.2;
+      }
+      100% {
+        transform: translate(200vw, 200vh) scale(0);
+        opacity: 0;
+      }
+    }
+
+    .checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 1rem;
+}
+
+.checkbox-grid label {
+  display: block;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Product Search</h1>
+<form id="searchForm" method="GET" action="{% url 'product_search' %}" onsubmit="return validateForm()">
+  <div>
+    <label for="search_query">Search Query:</label>
+    <input type="text" id="search_query" name="search_query" required>
+  </div>
+  <div>
+    <label>Select Websites:</label>
+    <div class="checkbox-grid">
+      {% for website in websites %}
+      <label>
+        <input type="checkbox" name="websites" value="{{ website }}"> {{ website }}
+      </label>
+      {% endfor %}
+    </div>
+  </div>
+      
+  <button type="submit">Search</button>
+</form>
+
+  <!-- Background particles -->
+  <div class="particles">
+    <div class="particle" style="width: 5px; height: 5px; background-color: rgba(255, 255, 255, 0.6); left: 20vw; top: 30vh; animation-delay: -2s;"></div>
+    <div class="particle" style="width: 8px; height: 8px; background-color: rgba(255, 255, 255, 0.4); left: 80vw; top: 60vh; animation-delay: -6s;"></div>
+    <div class="particle" style="width: 3px; height: 3px; background-color: rgba(255, 255, 255, 0.7); left: 40vw; top: 80vh; animation-delay: -1s;"></div>
+    <div class="particle" style="width: 4px; height: 4px; background-color: rgba(255, 255, 255, 0.5); left: 20vw; top: 30vh; animation-delay: -2s;"></div>
+    <div class="particle" style="width: 7px; height: 7px; background-color: rgba(255, 255, 255, 0.3); left: 80vw; top: 60vh; animation-delay: -6s;"></div>
+    <div class="particle" style="width: 6px; height: 6px; background-color: rgba(255, 255, 255, 0.8); left: 40vw; top: 80vh; animation-delay: -1s;"></div>
+    <div class="particle" style="width: 5px; height: 5px; background-color: rgba(255, 255, 255, 0.6); left: 25vw; top: 35vh; animation-delay: -2s;"></div>
+    <div class="particle" style="width: 8px; height: 8px; background-color: rgba(255, 255, 255, 0.4); left: 85vw; top: 65vh; animation-delay: -6s;"></div>
+    <div class="particle" style="width: 3px; height: 3px; background-color: rgba(255, 255, 255, 0.7); left: 45vw; top: 85vh; animation-delay: -1s;"></div>
+    <div class="particle" style="width: 4px; height: 4px; background-color: rgba(255, 255, 255, 0.5); left: 25vw; top: 35vh; animation-delay: -2s;"></div>
+    <div class="particle" style="width: 7px; height: 7px; background-color: rgba(255, 255, 255, 0.3); left: 85vw; top: 65vh; animation-delay: -6s;"></div>
+    <div class="particle" style="width: 6px; height: 6px; background-color: rgba(255, 255, 255, 0.8); left: 45vw; top: 85vh; animation-delay: -1s;"></div>
+  </div>
+
+  <script>
+    function validateForm() {
+      var checkboxes = document.getElementsByName('websites');
+      var isChecked = False;
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          isChecked = true;
+          break;
+        }
+      }
+      if (!isChecked) {
+        alert('Please select at least one website.');
+        return false; 
+      }
+      return true;
+    }
+    </script>
+</body>
+</html>
