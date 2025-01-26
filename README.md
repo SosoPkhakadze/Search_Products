@@ -1,4 +1,4 @@
-# Product Search Project
+# Search Products Project
 
 This project is a web application built with Django that allows users to search for products on Amazon and Temu using their respective RapidAPI services.
 
@@ -31,8 +31,8 @@ These instructions will guide you on how to get a copy of the project up and run
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/product-search.git
-    cd product-search
+    git clone https://github.com/SosoPkhakadze/Search_Products.git
+    cd Search_Products 
     ```
 
 2. **Install dependencies:**

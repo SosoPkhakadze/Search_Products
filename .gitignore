@@ -18,5 +18,5 @@ staticfiles/
 # Database file (if you're using SQLite)
 db.sqlite3
 
-# Security keys (remove your actual keys from views.py before adding to .gitignore!)
+# Security keys
 YOUR-API-KEY
